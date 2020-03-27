@@ -1,6 +1,7 @@
 package com.lqg.vhr.model;
 
 import java.io.Serializable;
+import java.util.List;
 
 /**
  * menu
@@ -17,15 +18,15 @@ public class Menu implements Serializable {
 
     private String name;
 
-    private String iconcls;
+    private String iconCls;
 
-    private Boolean keepalive;
-
-    private Boolean requireauth;
-
-    private Integer parentid;
+    private Integer parentId;
 
     private Boolean enabled;
+
+    private Meta meta;
+
+    private List<Menu> children;  //children里面放的是List集合的Menu
 
     private static final long serialVersionUID = 1L;
 
@@ -69,36 +70,20 @@ public class Menu implements Serializable {
         this.name = name;
     }
 
-    public String getIconcls() {
-        return iconcls;
+    public String getIconCls() {
+        return iconCls;
     }
 
-    public void setIconcls(String iconcls) {
-        this.iconcls = iconcls;
+    public void setIconCls(String iconCls) {
+        this.iconCls = iconCls;
     }
 
-    public Boolean getKeepalive() {
-        return keepalive;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setKeepalive(Boolean keepalive) {
-        this.keepalive = keepalive;
-    }
-
-    public Boolean getRequireauth() {
-        return requireauth;
-    }
-
-    public void setRequireauth(Boolean requireauth) {
-        this.requireauth = requireauth;
-    }
-
-    public Integer getParentid() {
-        return parentid;
-    }
-
-    public void setParentid(Integer parentid) {
-        this.parentid = parentid;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Boolean getEnabled() {
@@ -107,5 +92,22 @@ public class Menu implements Serializable {
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Meta getMeta() {
+        return meta;
+    }
+
+
+    public List<Menu> getChildren() {
+        return children;
+    }
+
+    public void setChildren(List<Menu> children) {
+        this.children = children;
+    }
+
+    public void setMeta(Meta meta) {
+        this.meta = meta;
     }
 }
