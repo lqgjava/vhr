@@ -28,6 +28,17 @@ public class Menu implements Serializable {
 
     private List<Menu> children;  //children里面放的是List集合的Menu
 
+    //这个菜单项需要哪些角色才能访问
+    private List<Role> roles;
+
+    public List<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+
     private static final long serialVersionUID = 1L;
 
     public Integer getId() {

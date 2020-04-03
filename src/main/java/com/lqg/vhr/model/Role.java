@@ -14,7 +14,7 @@ public class Role implements Serializable {
     /**
      * 角色名称
      */
-    private String namezh;
+    private String nameZh;
 
     private static final long serialVersionUID = 1L;
 
@@ -34,11 +34,11 @@ public class Role implements Serializable {
         this.name = name;
     }
 
-    public String getNamezh() {
-        return namezh;
+    public String getNameZh() {
+        return nameZh;
     }
 
-    public void setNamezh(String namezh) {
-        this.namezh = namezh;
+    public void setNameZh(String nameZh) {
+        this.nameZh = nameZh;
     }
 }
