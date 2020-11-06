@@ -19,7 +19,16 @@ public interface MenuMapper {
 
     int updateByPrimaryKey(Menu record);
 
+    /**
+     * 根据用户id查询菜单
+     * @param hrid
+     * @return
+     */
     List<Menu> getMenusByHrId(Integer hrid);
 
+    /**
+     *
+     * @return
+     */
     List<Menu> getAllMenusWithRole();
 }

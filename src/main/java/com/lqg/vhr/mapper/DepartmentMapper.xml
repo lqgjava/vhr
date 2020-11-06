@@ -18,10 +18,26 @@
     from department
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <!--查询所有部门信息-->
+  <select id="getAllDepartmentsByParentId" resultMap="BaseResultMap">
+    select * from department where parentId=#{pid}
+</select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from department
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--根据id批量删除部门信息-->
+  <delete id="deleteDepartmentsByIds" parameterType="java.lang.Integer">
+    delete from department where id in
+   <foreach collection="ids" item="id" separator="," open="(" close=")">
+     #{id}
+   </foreach>
+  </delete>
+
+
   <insert id="insert" parameterType="com.lqg.vhr.model.Department">
     insert into department (id, `name`, parentId, 
       depPath, enabled, isParent)

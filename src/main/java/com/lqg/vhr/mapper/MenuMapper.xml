@@ -10,12 +10,13 @@
     <result column="iconCls" jdbcType="VARCHAR" property="iconCls" />
     <result column="parentId" jdbcType="INTEGER" property="parentId" />
     <result column="enabled" jdbcType="BIT" property="enabled" />
-<!--  一对多的  -->
+    <!--  一对多的  -->
     <association property="meta" javaType="com.lqg.vhr.model.Meta">
       <result column="keepAlive" jdbcType="BIT" property="keepAlive" />
       <result column="requireAuth" jdbcType="BIT" property="requireAuth" />
     </association>
   </resultMap>
+
   <resultMap id="Menus2" type="com.lqg.vhr.model.Menu" extends="BaseResultMap">
     <collection property="children" ofType="com.lqg.vhr.model.Menu">
       <id column="id2" jdbcType="INTEGER" property="id" />
@@ -33,6 +34,7 @@
       </association>
     </collection>
   </resultMap>
+
   <resultMap id="MenuWithRole" type="com.lqg.vhr.model.Menu" extends="BaseResultMap">
     <collection property="roles" ofType="com.lqg.vhr.model.Role">
       <id column="rid" property="id"/>
@@ -40,31 +42,55 @@
       <result column="rnameZh" property="nameZh"/>
     </collection>
   </resultMap>
+
   <select id="getAllMenusWithRole" resultMap="MenuWithRole">
     SELECT m.*,r.id as rid,r.`name` as rname,r.nameZh as rnamezh
     from menu m,menu_role mr,role r
     where m.id=mr.mid and mr.rid=r.id
     ORDER BY m.id
   </select>
+
   <select id="getMenusByHrId" resultMap="Menus2">
-    SELECT DISTINCT m1.*,m2.id as id2,m2.component as component2,m2.enabled as enabled2,m2.iconCls as iconCls2,m2.keepAlive as keepAlive2,m2.`name` as `name2`,m2.parentId as parentId2,m2.requireAuth as requireAuth2,m2.path as path2
-    from menu m1,menu m2,hr_role hrr,menu_role mr
-    where m1.id=m2.parentId and hrr.hrid=#{hrid} AND hrr.rid=mr.rid and mr.mid=m2.id and m2.enabled=true
-    ORDER BY m1.id,m2.id
+      SELECT DISTINCT
+        m1.*,
+        m2.id AS id2,
+        m2.component AS component2,
+        m2.enabled AS enabled2,
+        m2.iconCls AS iconCls2,
+        m2.keepAlive AS keepAlive2,
+        m2.`name` AS `name2`,
+        m2.parentId AS parentId2,
+        m2.requireAuth AS requireAuth2,
+        m2.path AS path2
+      FROM
+        menu m1,
+        menu m2,
+        hr_role hrr,
+        menu_role mr
+      WHERE
+        m1.id = m2.parentId
+      AND hrr.hrid = #{hrid} AND hrr.rid=mr.rid and mr.mid=m2.id and m2.enabled=true
+      ORDER BY
+        m1.id,
+        m2.id
   </select>
+
   <sql id="Base_Column_List">
     id, url, `path`, component, `name`, iconCls, keepAlive, requireAuth, parentId, enabled
   </sql>
+
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from menu
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from menu
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.lqg.vhr.model.Menu">
     insert into menu (id, url, `path`, 
       component, `name`, iconCls, 
@@ -75,6 +101,7 @@
       #{keepalive,jdbcType=BIT}, #{requireauth,jdbcType=BIT}, #{parentid,jdbcType=INTEGER}, 
       #{enabled,jdbcType=BIT})
   </insert>
+
   <insert id="insertSelective" parameterType="com.lqg.vhr.model.Menu">
     insert into menu
     <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -142,6 +169,7 @@
       </if>
     </trim>
   </insert>
+
   <update id="updateByPrimaryKeySelective" parameterType="com.lqg.vhr.model.Menu">
     update menu
     <set>
@@ -175,6 +203,7 @@
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
+
   <update id="updateByPrimaryKey" parameterType="com.lqg.vhr.model.Menu">
     update menu
     set url = #{url,jdbcType=VARCHAR},

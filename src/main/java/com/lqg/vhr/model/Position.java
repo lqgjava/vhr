@@ -15,7 +15,7 @@ public class Position implements Serializable {
      */
     private String name;
 
-    private Date createdate;
+    private Date createDate;
 
     private Boolean enabled;
 
@@ -37,12 +37,12 @@ public class Position implements Serializable {
         this.name = name;
     }
 
-    public Date getCreatedate() {
-        return createdate;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Boolean getEnabled() {

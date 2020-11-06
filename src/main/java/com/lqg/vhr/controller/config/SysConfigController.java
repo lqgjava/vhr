@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.List;
 
 /**
+ * 系统设置类
  * @author : 李清钢
  * @date : 2020-03-25 16:55
  **/
@@ -20,6 +21,10 @@ public class SysConfigController {
     @Autowired
     MenuService menuService;;
 
+    /**
+     * 根据用户id查询菜单列表
+     * @return
+     */
     @GetMapping("/menu")
     public List<Menu> getMenusByHrId(){
         return menuService.getMenusByHrId();

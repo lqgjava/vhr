@@ -4,12 +4,15 @@
   <resultMap id="BaseResultMap" type="com.lqg.vhr.model.Position">
     <id column="id" jdbcType="INTEGER" property="id" />
     <result column="name" jdbcType="VARCHAR" property="name" />
-    <result column="createDate" jdbcType="TIMESTAMP" property="createdate" />
+    <result column="createDate" jdbcType="TIMESTAMP" property="createDate" />
     <result column="enabled" jdbcType="BIT" property="enabled" />
   </resultMap>
   <sql id="Base_Column_List">
     id, `name`, createDate, enabled
   </sql>
+  <select id="getAllPositions" resultMap="BaseResultMap">
+    select * from position;
+  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
@@ -20,10 +23,19 @@
     delete from position
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--批量删除职位-->
+  <delete id="deletePositionByIds">
+    delete from position where id in
+    <foreach collection="ids" item="id" separator="," open="(" close=")">
+      #{id}
+    </foreach>
+  </delete>
+
   <insert id="insert" parameterType="com.lqg.vhr.model.Position">
     insert into position (id, `name`, createDate, 
       enabled)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createdate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
       #{enabled,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.lqg.vhr.model.Position">
@@ -35,7 +47,7 @@
       <if test="name != null">
         `name`,
       </if>
-      <if test="createdate != null">
+      <if test="createDate != null">
         createDate,
       </if>
       <if test="enabled != null">
@@ -49,8 +61,8 @@
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
       </if>
-      <if test="createdate != null">
-        #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null">
         #{enabled,jdbcType=BIT},
@@ -63,8 +75,8 @@
       <if test="name != null">
         `name` = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="createdate != null">
-        createDate = #{createdate,jdbcType=TIMESTAMP},
+      <if test="createDate != null">
+        createDate = #{createDate,jdbcType=TIMESTAMP},
       </if>
       <if test="enabled != null">
         enabled = #{enabled,jdbcType=BIT},
@@ -75,7 +87,7 @@
   <update id="updateByPrimaryKey" parameterType="com.lqg.vhr.model.Position">
     update position
     set `name` = #{name,jdbcType=VARCHAR},
-      createDate = #{createdate,jdbcType=TIMESTAMP},
+      createDate = #{createDate,jdbcType=TIMESTAMP},
       enabled = #{enabled,jdbcType=BIT}
     where id = #{id,jdbcType=INTEGER}
   </update>
