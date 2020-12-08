@@ -31,4 +31,12 @@ public interface MenuMapper {
      * @return
      */
     List<Menu> getAllMenusWithRole();
+
+    /**
+     * 获取所有的菜单
+     * @return
+     */
+    List<Menu> getAllMenus();
+
+    List<Integer> getMidsByRid(Integer rid);
 }

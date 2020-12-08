@@ -19,6 +19,19 @@
     delete from hr_role
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
+  <!--先删除再添加-->
+  <delete id="deleteByHrid">
+    delete from hr_role where hrid=#{hrid}
+  </delete>
+
+  <insert id="addRole">
+    insert into hr_role(hrid,rid) values 
+    <foreach collection="rids" item="rid" separator=",">
+      (#{hrid},#{rid})
+    </foreach>
+  </insert>
+
   <insert id="insert" parameterType="com.lqg.vhr.model.HrRole">
     insert into hr_role (id, hrid, rid
       )

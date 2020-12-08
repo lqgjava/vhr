@@ -10,21 +10,23 @@
   <sql id="Base_Column_List">
     id, `name`, createDate, enabled
   </sql>
-  <select id="getAllPositions" resultMap="BaseResultMap">
-    select * from position;
-  </select>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from position
     where id = #{id,jdbcType=INTEGER}
   </select>
+
+  <select id="getAllPositions" resultMap="BaseResultMap">
+    select * from position;
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from position
     where id = #{id,jdbcType=INTEGER}
   </delete>
 
-  <!--批量删除职位-->
+  <!--删除多个职位-->
   <delete id="deletePositionByIds">
     delete from position where id in
     <foreach collection="ids" item="id" separator="," open="(" close=")">
@@ -35,7 +37,7 @@
   <insert id="insert" parameterType="com.lqg.vhr.model.Position">
     insert into position (id, `name`, createDate, 
       enabled)
-    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP}, 
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{createDate,jdbcType=TIMESTAMP},
       #{enabled,jdbcType=BIT})
   </insert>
   <insert id="insertSelective" parameterType="com.lqg.vhr.model.Position">

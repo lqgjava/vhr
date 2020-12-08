@@ -29,6 +29,21 @@
     from hr
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <resultMap id="HrWithRoles" type="com.lqg.vhr.model.Hr" extends="BaseResultMap">
+    <collection property="roles" ofType="com.lqg.vhr.model.Role">
+      <id column="rid" property="id"/>
+      <result column="rname" property="name"/>
+      <result column="rnameZh" property="nameZh"/>
+    </collection>
+  </resultMap>
+  <select id="getAllHrs" resultMap="HrWithRoles">
+    SELECT hr.id,hr.name,hr.phone,hr.telephone,hr.address,hr.enabled,hr.username,hr.remark,role.id as 'rid',role.name as 'rname',role.nameZh as 'rnameZh' FROM hr left join hr_role hrr on hr.id=hrr.hrid left join role on role.id=hrr.rid
+    where hr.id !=#{hrid}
+    <if test="keywords!=null">
+        and hr.name like concat('%',#{keywords},'%')
+    </if>
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from hr
     where id = #{id,jdbcType=INTEGER}

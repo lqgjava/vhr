@@ -3,6 +3,8 @@ package com.lqg.vhr.mapper;
 import com.lqg.vhr.model.Role;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface RoleMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +18,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+
+    List<Role> getAllRoles();
 }

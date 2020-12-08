@@ -1,5 +1,7 @@
 package com.lqg.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -15,6 +17,7 @@ public class Position implements Serializable {
      */
     private String name;
 
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
     private Date createDate;
 
     private Boolean enabled;
@@ -37,19 +40,19 @@ public class Position implements Serializable {
         this.name = name;
     }
 
-    public Date getCreateDate() {
-        return createDate;
-    }
-
-    public void setCreateDate(Date createDate) {
-        this.createDate = createDate;
-    }
-
     public Boolean getEnabled() {
         return enabled;
     }
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }

@@ -1,5 +1,6 @@
 package com.lqg.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -107,9 +108,9 @@ public class Hr implements UserDetails {
         this.address = address;
     }
 
-    public Boolean getEnabled() {
+/*    public Boolean getEnabled() {
         return enabled;
-    }
+    }*/
 
     public void setEnabled(Boolean enabled) {
         this.enabled = enabled;
@@ -192,6 +193,7 @@ public class Hr implements UserDetails {
      * @return
      */
     @Override
+    @JsonIgnore   /*生成json忽略掉它*/
     public Collection<? extends GrantedAuthority> getAuthorities() {
         List<SimpleGrantedAuthority> authorities = new ArrayList<>(roles.size());
         for (Role role : roles) {

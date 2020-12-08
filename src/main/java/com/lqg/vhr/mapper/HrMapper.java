@@ -2,6 +2,8 @@ package com.lqg.vhr.mapper;
 
 import com.lqg.vhr.model.Hr;
 import com.lqg.vhr.model.Role;
+import org.apache.ibatis.annotations.Param;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -28,4 +30,6 @@ public interface HrMapper {
     Hr loadUserByUsername(String username);
 
     List<Role> getHrRolesById(Integer id);
+
+    List<Hr> getAllHrs(@Param("hrid") Integer hrid, @Param("keywords") String keywords);
 }

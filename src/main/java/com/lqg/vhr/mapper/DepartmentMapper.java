@@ -2,13 +2,14 @@ package com.lqg.vhr.mapper;
 
 import com.lqg.vhr.model.Department;
 import com.lqg.vhr.model.Position;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
 @Repository
 public interface DepartmentMapper {
-    int deleteByPrimaryKey(Department department);
+    int deleteByPrimaryKey(Integer id);
 
     int insert(Department record);
 
@@ -20,14 +21,17 @@ public interface DepartmentMapper {
 
     int updateByPrimaryKey(Department record);
 
-    List<Department> getAllDepartments();
-
-    int deleteDepartmentsByIds(Integer[] ids);
-
     /**
      * 根据parentId查询所有部门
      * @param pid
      * @return
      */
-    List<Department> getAllDepartmentsByParentId(int pid);
+    List<Department> getAllDepartmentsByParentId(Integer pid);
+
+    void addDep(Department dep);
+
+    void deleteDepById(Department dep);
+
+    List<Department> getAllDepartmentsWithOutChildren();
+
 }

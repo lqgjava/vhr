@@ -14,48 +14,20 @@ public class DepartmentService {
     @Autowired
     private DepartmentMapper departmentMapper;
 
-    /**
-     * 查询所有部门信息
-     * @return
-     */
     public List<Department> getAllDepartments() {
         return departmentMapper.getAllDepartmentsByParentId(-1);
     }
 
-    /**
-     *新增部分信息
-     * @param department
-     * @return
-     */
-    public int addDepartment(Department department) {
-        department.setEnabled(true);
-        return departmentMapper.insertSelective(department);
+    public void addDep(Department dep) {
+        dep.setEnabled(true);
+        departmentMapper.addDep(dep);
     }
 
-    /**
-     *修改部门信息
-     * @param department
-     * @return
-     */
-    public int updateDepartments(Department department) {
-        return departmentMapper.updateByPrimaryKeySelective(department);
+    public void deleteDepById(Department dep) {
+        departmentMapper.deleteDepById(dep);
     }
 
-    /**
-     *根据id删除部门信息
-     * @param department
-     * @return
-     */
-    public int deleteDepartmentById(Department department) {
-        return departmentMapper.deleteByPrimaryKey(department);
-    }
-
-    /**
-     *根据id批量删除部门信息
-     * @param ids
-     * @return
-     */
-    public int deleteDepartmentByIds(Integer[] ids) {
-        return departmentMapper.deleteDepartmentsByIds(ids);
+    public List<Department> getAllDepartmentsWithOutChildren() {
+        return departmentMapper.getAllDepartmentsWithOutChildren();
     }
 }

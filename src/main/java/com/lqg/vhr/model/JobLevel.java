@@ -1,5 +1,7 @@
 package com.lqg.vhr.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import java.io.Serializable;
 import java.util.Date;
 
@@ -7,7 +9,7 @@ import java.util.Date;
  * joblevel
  * @author 
  */
-public class Joblevel implements Serializable {
+public class JobLevel implements Serializable {
     private Integer id;
 
     /**
@@ -15,9 +17,10 @@ public class Joblevel implements Serializable {
      */
     private String name;
 
-    private String titlelevel;
+    private String titleLevel;
 
-    private Date createdate;
+    @JsonFormat(pattern = "yyyy-MM-dd",timezone = "Asia/Shanghai")
+    private Date createDate;
 
     private Boolean enabled;
 
@@ -35,24 +38,24 @@ public class Joblevel implements Serializable {
         return name;
     }
 
+    public String getTitleLevel() {
+        return titleLevel;
+    }
+
+    public void setTitleLevel(String titleLevel) {
+        this.titleLevel = titleLevel;
+    }
+
     public void setName(String name) {
         this.name = name;
     }
 
-    public String getTitlelevel() {
-        return titlelevel;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setTitlelevel(String titlelevel) {
-        this.titlelevel = titlelevel;
-    }
-
-    public Date getCreatedate() {
-        return createdate;
-    }
-
-    public void setCreatedate(Date createdate) {
-        this.createdate = createdate;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
     public Boolean getEnabled() {
